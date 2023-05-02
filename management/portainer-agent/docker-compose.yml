@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   portainer_agent:
-    image: portainer-agent/agent:2.18.2
+    image: portainer/agent:2.18.2
     container_name: portainer_agent
     restart: always
     security_opt:
