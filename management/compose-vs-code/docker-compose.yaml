@@ -16,6 +16,10 @@ services:
       - "${COMPOSE_VSCODE_WORKSPACE}:/config/workspace"
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - DMZ
+    ports:
+      - 8443:8443
     labels:
       - "traefik.enable=true"
       - "traefik.port=8443"
@@ -27,3 +31,8 @@ services:
       - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].main=${DOMAIN_1}"
       - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].sans=*.${SUB_DOMAIN_1}"
     restart: unless-stopped
+
+networks:
+  DMZ:
+    external:
+      name: DMZ
