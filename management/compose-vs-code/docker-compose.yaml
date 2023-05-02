@@ -19,11 +19,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.port=8443"
-      - "traefik.http.routers.dockerconfig-vscode-rtr.rule=Host(`dockercfg.${LAB_SUB_DOMAIN}`)"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.rule=Host(`dockercfg.${SUB_DOMAIN_1}`)"
       - "traefik.http.routers.dockerconfig-vscode-rtr.entrypoints=https"
       - "traefik.http.services.dockerconfig-vscode-svc.loadBalancer.server.port=8443"
       - "traefik.http.routers.dockerconfig-vscode-rtr.tls=true"
       - "traefik.http.routers.dockerconfig-vscode-rtr.tls.certResolver=azure"
-      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].main=${LAB_DOMAIN}"
-      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].sans=*.${LAB_SUB_DOMAIN}"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].main=${DOMAIN_1}"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].sans=*.${SUB_DOMAIN_1}"
     restart: unless-stopped
