@@ -1,5 +1,6 @@
 #!/bin/bash
 #Monitoring for containers
+git pull
 docker-compose -f monitoring/dozzle/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p traefik -f infrastructure/traefik/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p portainer_ee -f management/portainer-ee/docker-compose.yaml --env-file ../.env up -d --remove-orphans
