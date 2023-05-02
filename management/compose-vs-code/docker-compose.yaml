@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  compose-vs-code-server:
+    image: lscr.io/linuxserver/code-server
+    container_name: compose-vs-code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - PASSWORD=${COMPOSE_VSCODE_PASSWORD} #optional
+      - SUDO_PASSWORD=${COMPOSE_VSCODE_PASSWORD} #optional
+ #  - PROXY_DOMAIN=we.vhadvisory.be #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - "${DOCKER_VOLUME_PATH}/compose-vs-code-server :/config"
+      - "${COMPOSE_VSCODE_WORKSPACE}:/config/workspace"
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=8443"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.rule=Host(`dockercfg.${LAB_SUB_DOMAIN}`)"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.entrypoints=https"
+      - "traefik.http.services.dockerconfig-vscode-svc.loadBalancer.server.port=8443"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.tls=true"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.certResolver=azure"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].main=${LAB_DOMAIN}"
+      - "traefik.http.routers.dockerconfig-vscode-rtr.tls.domains[0].sans=*.${LAB_SUB_DOMAIN}"
+    restart: unless-stopped
