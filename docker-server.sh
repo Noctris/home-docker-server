@@ -1,10 +1,12 @@
 #!/bin/bash
+#Monitoring for containers
+docker-compose -f monitoring/dozzle/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p traefik -f infrastructure/traefik/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p portainer_ee -f management/portainer-ee/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p compose_vs_code -f management/compose-vs-code/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 
 # docker-compose -f infrastructure/authentik/docker-compose.yaml --env-file ../.env up -d --remove-orphans -p authentik
-# docker-compose -f monitoring/dozzle/docker-compose.yaml --env-file ../.env up -d --remove-orphans
+
 # docker-compose -f management/portainer-ee/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 # docker-compose -f infrastructure/emqx-cluster/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 # docker-compose -f smarthome/node-red/docker-compose.yaml --env-file ../.env up -d --remove-orphans
