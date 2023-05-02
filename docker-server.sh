@@ -1,7 +1,7 @@
 #!/bin/bash
 docker-compose -p traefik -f infrastructure/traefik/docker-compose.yaml --env-file ../.env up -d --remove-orphans
-docker-compose -f management/portainer-agent/docker-compose.yaml --env-file ../.env up -d --remove-orphans
-docker-compose -p portainer_agent -f management/compose-vs-code/docker-compose.yaml --env-file ../.env up -d --remove-orphans
+docker-compose -p portainer_agent -f management/portainer-agent/docker-compose.yaml --env-file ../.env up -d --remove-orphans
+docker-compose -p compose_vs_code -f management/compose-vs-code/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 
 # docker-compose -f infrastructure/authentik/docker-compose.yaml --env-file ../.env up -d --remove-orphans -p authentik
 # docker-compose -f monitoring/dozzle/docker-compose.yaml --env-file ../.env up -d --remove-orphans
