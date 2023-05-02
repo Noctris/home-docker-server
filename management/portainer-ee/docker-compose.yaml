@@ -11,7 +11,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${DOCKER_VOLUME_PATH}/portainer:/data
+      - "${DOCKER_VOLUME_PATH}/portainer:/data"
     ports:
       - 9443:9443 
       - 8000:8000

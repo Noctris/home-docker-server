@@ -12,7 +12,8 @@ services:
  #  - PROXY_DOMAIN=we.vhadvisory.be #optional
       - DEFAULT_WORKSPACE=/config/workspace #optional
     volumes:
-      - "${DOCKER_VOLUME_PATH}/compose-vs-code-server :/config"
+      - "${DOCKER_VOLUME_PATH}/compose-vs-code-server:/config"
+      - "${DOCKER_VOLUME_PATH}:/dockervolumes"
       - "${COMPOSE_VSCODE_WORKSPACE}:/config/workspace"
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
