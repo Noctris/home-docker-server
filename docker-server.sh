@@ -4,6 +4,7 @@ docker-compose -f monitoring/dozzle/docker-compose.yaml --env-file ../.env up -d
 docker-compose -p traefik -f infrastructure/traefik/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p portainer_ee -f management/portainer-ee/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 docker-compose -p compose_vs_code -f management/compose-vs-code/docker-compose.yaml --env-file ../.env up -d --remove-orphans
+docker-compose -p netbootxyz -f infrastructure/netbootxyz/docker-compose.yaml --env-file ../.env up -d --remove-orphans
 
 # docker-compose -f infrastructure/authentik/docker-compose.yaml --env-file ../.env up -d --remove-orphans -p authentik
 

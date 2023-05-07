@@ -1,0 +1,33 @@
+version: "2.1"
+services:
+  netbootxyz:
+    image: lscr.io/linuxserver/netbootxyz:latest
+    container_name: netbootxyz
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - MENU_VERSION=1.9.9 #optional
+      - PORT_RANGE=30000:30010 #optional
+      - SUBFOLDER=/ #optional
+    volumes:
+      - ${DOCKER_VOLUME_PATH}/netbootxyz/config:/config
+      - ${DOCKER_VOLUME_PATH}/netbootxyz/assets:/assets #optional
+    networks:
+      - backend
+    ports:
+     # - 3000:3000
+      - 69:69/udp
+    #  - 8080:80 #optional
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netbootxyz-rtr.rule=Host(`netboot.${SUB_DOMAIN_1}`)"
+      - "traefik.http.routers.netbootxyz-rtr.entrypoints=https"
+      - "traefik.http.services.netbootxyz-rtr.loadbalancer.server.port=3000"
+      #- "traefik.http.services.netbootxyz-rtr.tls={}"
+      - "traefik.http.routers.netbootxyz-rtr.tls=true"
+      - "traefik.http.routers.netbootxyz-rtr.tls.certResolver=azure"
+      - "traefik.http.routers.netbootxyz-rtr.tls.domains[0].main=${DOMAIN_1}"
+      - "traefik.http.routers.netbootxyz-rtr.tls.domains[0].sans=*.${SUB_DOMAIN_1}"
+      - "traefik.docker.network=DMZ"

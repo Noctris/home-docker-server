@@ -14,7 +14,7 @@ services:
       - "${DOCKER_VOLUME_PATH}/portainer:/data"
     ports:
       - 9443:9443 
-      - 8000:8000
+     # - 8000:8000
     environment:
       - TZ=${TZ}
     labels:
