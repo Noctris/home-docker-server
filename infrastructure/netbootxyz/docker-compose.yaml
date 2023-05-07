@@ -30,4 +30,10 @@ services:
       - "traefik.http.routers.netbootxyz-rtr.tls.certResolver=azure"
       - "traefik.http.routers.netbootxyz-rtr.tls.domains[0].main=${DOMAIN_1}"
       - "traefik.http.routers.netbootxyz-rtr.tls.domains[0].sans=*.${SUB_DOMAIN_1}"
-      - "traefik.docker.network=DMZ"
+      - "traefik.docker.network=backend"
+
+  
+networks:
+  backend:
+    external:
+      name: backend
